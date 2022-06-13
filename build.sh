@@ -1,4 +1,4 @@
-#!/bin/bash -leo pipefail
+#!/bin/bash -le
 
 gis_versions=(
   3.0.5
