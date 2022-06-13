@@ -1,0 +1,10 @@
+name: build-images
+on:
+  push:
+    branches:
+      - main
+jobs:
+  do-stuff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
