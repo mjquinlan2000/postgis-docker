@@ -1,15 +1,15 @@
-ARG IMAGE=postgres:12-alpine
+ARG BASE_IMAGE=postgres:12-alpine
 
-FROM $IMAGE AS builder
+FROM $BASE_IMAGE AS builder
 
-ARG VERSION=3.0.5
+ARG POSTGIS_VERSION=3.0.5
 
 RUN apk add --no-cache curl make clang libc-dev gcc perl libxml2-dev geos-dev proj-dev gdal-dev llvm protobuf-c-dev g++ && \
   # Fetch postgis
   mkdir -p /tmp/src && \
   cd /tmp/src && \
-  curl -sSL https://download.osgeo.org/postgis/source/postgis-$VERSION.tar.gz | tar xvz && \
-  cd postgis-$VERSION && \
+  curl -sSL https://download.osgeo.org/postgis/source/postgis-$POSTGIS_VERSION.tar.gz | tar xvz && \
+  cd postgis-$POSTGIS_VERSION && \
   # Compile
   ./configure && \
   make && \
