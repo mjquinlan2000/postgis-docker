@@ -12,6 +12,8 @@ images=(
   postgres:14-alpine
 )
 
+repository=${REPOSITORY:-mjquinlan2000/postgis}
+platforms=${PLATFORMS:-linux/amd64,linux/arm64}
 
 for image in ${images[@]}; do
   for version in ${gis_versions[@]}; do
@@ -25,10 +27,10 @@ for image in ${images[@]}; do
     echo "IMAGE NAME: $image_name"
     echo "TAG: $tag"
 
-    docker buildx build --platform linux/amd64,linux/arm64 --pull \
+    docker buildx build --platform $platforms --pull \
       --build-arg POSTGIS_VERSION=$version \
       --build-arg BUILD_IMAGE=$image \
-      -t mjquinlan2000/postgis:$tag \
+      -t $repository:$tag \
       --push .
 
     echo "Done!"
