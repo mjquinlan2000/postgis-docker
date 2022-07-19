@@ -15,6 +15,9 @@ images=(
 repository=${REPOSITORY:-mjquinlan2000/postgis}
 platforms=${PLATFORMS:-linux/amd64,linux/arm64}
 
+echo "Pushing all images to $repository"
+echo "Building for platform(s) $platforms"
+
 for image in ${images[@]}; do
   for version in ${gis_versions[@]}; do
     if [[ $version = "3.0.5" ]] && [[ $image = "postgres:14-alpine" ]]; then continue; fi
@@ -23,8 +26,6 @@ for image in ${images[@]}; do
     echo "Starting build..."
     echo "IMAGE: $image"
     echo "POSTGIS VERSION: $version"
-    echo "PLATFORM: $platform"
-    echo "IMAGE NAME: $image_name"
     echo "TAG: $tag"
 
     docker buildx build --platform $platforms --pull \
