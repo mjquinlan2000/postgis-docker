@@ -1,12 +1,10 @@
 #!/bin/bash -le
 
 gis_versions=(
-  3.0.5
-  3.1.5
-  3.1.7
-  3.2.1
-  3.2.3
-  3.3.0
+  3.0.8
+  3.1.8
+  3.2.4
+  3.3.2
 )
 
 images=(
@@ -23,7 +21,7 @@ echo "Building for platform(s) $platforms"
 
 for image in ${images[@]}; do
   for version in ${gis_versions[@]}; do
-    if [[ $version = "3.0.5" ]] && [[ $image = "postgres:14-alpine" ]]; then continue; fi
+    if [[ $version = "3.0.8" ]] && [[ $image = "postgres:14-alpine" ]]; then continue; fi
     tag=`echo $image | sed s/:/-/g`-postgis-$version
 
     echo "Starting build..."
